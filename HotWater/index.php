@@ -36,13 +36,23 @@ $loginbox->setField("title",_TITLE);
 $menu = new Template("menu");
 
 #add html element
-$html = new HtmlElement(HtmlTags::LI);
+$htmlLi = new HtmlElement(HtmlTags::LI);
 for ($i = 0; $i < 10; $i++) {
-    $html->setContent("Menu Voice $i" );
-    $menu->addElementToField("menulist", $html->getHtmlTag());
+    $htmlLi->setContent("Menu Voice $i" );
+    $menu->addElementToField("menulist", $htmlLi->getHtmlTag());
 }
 
 $basePage->addContent("menu", $menu);
+
+$htmlSpan = new HtmlElement(HtmlTags::SPAN);
+$htmlSpan->setAttribute("id", "label");
+$htmlSpan->setContent("Selecte a menu voice");
+
+
+$contentContainer = new Template("contentpage");
+$contentContainer->addElementToField("mycontent", $htmlSpan->getHtmlTag());
+
+$basePage->addContent("contentContainer", $contentContainer);
 
 $basePage->showPage();
 
