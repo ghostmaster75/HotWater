@@ -16,12 +16,15 @@ class BasePage
     private $templateName;
 
     private $template;
+    
+    private $title;
 
     private $css = array();
 
     private $script = array();
 
     private $content = array();
+    
 
     private const LINKCSS = "<link rel='stylesheet' href='{css}'>" . PHP_EOL;
 
@@ -42,6 +45,14 @@ class BasePage
     private function getTemplateFile()
     {
         $this->template = file_get_contents("templates/" . $this->templateName . ".ctp");
+    }
+    
+    public function setPageTitle(string $title) {
+        $this->title = $title;
+    }
+    
+    public function getPageTitle() {
+        return $this->title;
     }
 
     /**
@@ -173,6 +184,8 @@ class BasePage
         $script = "";
         $content = "";
         
+        
+        
         foreach ($this->css as $cssUrl) {
             $css .= preg_replace("({css})", $cssUrl, self::LINKCSS);
         }
@@ -188,6 +201,7 @@ class BasePage
             }
         }
         
+        $this->template = preg_replace("({pagetitle})", $this->getPageTitle(), $this->template);
         $this->template = preg_replace("({css})", $css, $this->template);
         $this->template = preg_replace("({script})", $script, $this->template);
         $this->template = preg_replace("({content})", $content, $this->template);

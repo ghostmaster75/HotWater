@@ -15,6 +15,7 @@ $view = new HomeView($model);
 
 $basePage = new BasePage();
 
+$basePage->setPageTitle("Example of HotWater");
 $basePage->addCss("css/normalize.min.css");
 $basePage->addCss("css/main.css");
 $basePage->addCss("https://fonts.googleapis.com/css?family=Oswald");
