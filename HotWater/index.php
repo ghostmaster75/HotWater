@@ -38,11 +38,14 @@ if (isset($_GET['do']) && ! empty($_GET['do'])) {
 
 
 $basePage->addContent("loginbox", $loginbox);
-
-$basePage->showPage();
-$html = new HtmlElement(HtmlTags::ADDRESS);
+$html = new HtmlElement(HtmlTags::A);
 $html->setContent("www.google.it");
 $html->setAttribute("href", "https://www.google.com");
-echo $html->getHtmlTag();
+
+$basePage->addContent("googlelink", $html);
+
+$basePage->showPage();
+
+
 
 ?>
