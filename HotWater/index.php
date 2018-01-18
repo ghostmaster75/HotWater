@@ -25,25 +25,24 @@ $basePage->addScript("js/plugins.js");
 $basePage->addScript("js/main.js");
 
 
-
+#load template object and set fields
 $loginbox = new Template("login");
-
 $loginbox->setField("title",_TITLE);
 
+#add content from template
+#$basePage->addContent("loginbox", $loginbox);
 
 
+$menu = new Template("menu");
 
-if (isset($_GET['do']) && ! empty($_GET['do'])) {
-    $controller->{$_GET['do']}();
+#add html element
+$html = new HtmlElement(HtmlTags::LI);
+for ($i = 0; $i < 10; $i++) {
+    $html->setContent("Menu Voice $i" );
+    $menu->addElementToField("menulist", $html->getHtmlTag());
 }
 
-
-$basePage->addContent("loginbox", $loginbox);
-$html = new HtmlElement(HtmlTags::A);
-$html->setContent("www.google.it");
-$html->setAttribute("href", "https://www.google.com");
-
-$basePage->addContent("googlelink", $html);
+$basePage->addContent("menu", $menu);
 
 $basePage->showPage();
 

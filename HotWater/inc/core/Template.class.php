@@ -48,9 +48,11 @@ class Template {
     
     private function buildTemplate() {
         foreach ($this->fields as $fieldName => $fieldValues){
+            $content = "";
             foreach ($fieldValues as $fieldValue){
-                $this->template = preg_replace("({" . $fieldName ."})", $fieldValue, $this->template);
+                $content .= $fieldValue;
             }
+            $this->template = preg_replace("({" . $fieldName ."})", $content, $this->template);
         }       
     }
     

@@ -16,7 +16,7 @@ class BasePage
     private $templateName;
 
     private $template;
-    
+
     private $title;
 
     private $css = array();
@@ -24,7 +24,6 @@ class BasePage
     private $script = array();
 
     private $content = array();
-    
 
     private const LINKCSS = "<link rel='stylesheet' href='{css}'>" . PHP_EOL;
 
@@ -40,18 +39,35 @@ class BasePage
     {
         $this->templateName = $templateName;
         self::getTemplateFile();
+        self::checkTemplate();
     }
 
     private function getTemplateFile()
     {
-        $this->template = file_get_contents("templates/" . $this->templateName . ".ctp");
+        if (! $this->template = file_get_contents("templates/" . $this->templateName . ".ctp")) {
+            throw new \Exception("Error on opening 'templates/" . $this->templateName . ".ctp'");
+        }
     }
-    
-    public function setPageTitle(string $title) {
+
+    private function checkTemplate()
+    {
+        $count = preg_match_all("({content})", $this->template);
+        if ($count == FALSE) {
+            throw new \Exception("Template 'templates/" . $this->templateName . ".ctp' error. No {content} tag found");
+        }
+        
+        if ($count > 1) {
+            throw new \Exception("Template 'templates/" . $this->templateName . ".ctp' error. Found $count {content} tag. Expected only 1");
+        }
+    }
+
+    public function setPageTitle(string $title)
+    {
         $this->title = $title;
     }
-    
-    public function getPageTitle() {
+
+    public function getPageTitle()
+    {
         return $this->title;
     }
 
@@ -183,8 +199,6 @@ class BasePage
         $css = "";
         $script = "";
         $content = "";
-        
-        
         
         foreach ($this->css as $cssUrl) {
             $css .= preg_replace("({css})", $cssUrl, self::LINKCSS);
