@@ -135,7 +135,7 @@ class BasePage
      */
     public function addContent(string $contentName, $contentValue)
     {
-        if (get_class($contentValue) != "core\Template" && get_class($contentValue) != "core\HtmlElement") {
+        if (get_class($contentValue) != Template::class && get_class($contentValue) != HtmlElement::class) {
             throw new Exception("ContentValue must be a Tempate object or HtmlElement object this content is " . get_class($contentValue));
         }
         
@@ -143,7 +143,7 @@ class BasePage
             throw new Exception("Content Name cannot be null");
         }
         $this->content[$contentName] = $contentValue;
-        if (get_class($contentValue) == "core\Template") {
+        if (get_class($contentValue) == Template::class) {
             $this->addCssList($contentValue->getCss());
             $this->addScriptList($contentValue->getScript());
         }
@@ -181,7 +181,7 @@ class BasePage
         }
         
         foreach ($this->content as $contentName => $contentValue) {
-            if (get_class($contentValue) == "core\Template") {
+            if (get_class($contentValue) == Template::class) {
                 $content .= PHP_EOL . "<!-- " . $contentName . " -->" . $contentValue->getTemplate();
             } else {
                 $content .= PHP_EOL . "<!-- " . $contentName . " -->" . $contentValue->getHtmlTag();
