@@ -51,6 +51,7 @@ $htmlSpan->setContent("Selecte a menu voice");
 
 $contentContainer = new Template("contentpage");
 $contentContainer->addElementToField("mycontent", $htmlSpan->getHtmlTag());
+$contentContainer->addElementToField("mycontent", $loginbox);
 
 $basePage->addContent("contentContainer", $contentContainer);
 

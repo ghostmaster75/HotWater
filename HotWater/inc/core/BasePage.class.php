@@ -201,10 +201,22 @@ class BasePage
         $content = "";
         
         foreach ($this->css as $cssUrl) {
-            $css .= preg_replace("({css})", $cssUrl, self::LINKCSS);
+            if (is_array($cssUrl)) {
+                foreach ($cssUrl as $cssContentName =>  $subCssurl) {
+                    $css .= preg_replace("({css})", $subCssurl, self::LINKCSS);
+                }
+            } else {
+                $css .= preg_replace("({css})", $cssUrl, self::LINKCSS);
+            }
         }
         foreach ($this->script as $scriptUrl) {
-            $script .= preg_replace("({script})", $scriptUrl, self::LINKSCRIPT);
+            if (is_array($scriptUrl)) {
+                foreach ($scriptUrl as $scriptContentName => $subScripUrl) {
+                    $script .= preg_replace("({script})", $subScripUrl, self::LINKSCRIPT);
+                }
+            } else {
+                $script .= preg_replace("({script})", $scriptUrl, self::LINKSCRIPT);
+            }
         }
         
         foreach ($this->content as $contentName => $contentValue) {
