@@ -37,10 +37,18 @@ $menu = new Template("menu");
 
 #add html element
 $htmlLi = new HtmlElement(HtmlTags::LI);
-for ($i = 0; $i < 10; $i++) {
-    $htmlLi->setContent("Menu Voice $i" );
-    $menu->addElementToField("menulist", $htmlLi->getHtmlTag());
-}
+
+$htmlLi->setContent("<i class='fas fa-desktop'></i>System Information" );
+$menu->addElementToField("menulist", $htmlLi->getHtmlTag());
+$htmlLi->setContent("<i class='fab fa-hubspot'></i>Proxy");
+$menu->addElementToField("menulist", $htmlLi->getHtmlTag());
+$htmlLi->setContent("<i class='far fa-folder'></i>FTP" );
+$menu->addElementToField("menulist", $htmlLi->getHtmlTag());
+$htmlLi->setContent("<i class='fas fa-terminal'></i>Terminal" );
+$menu->addElementToField("menulist", $htmlLi->getHtmlTag());
+$htmlLi->setContent("<i class='fas fa-download'></i>Transmission" );
+$menu->addElementToField("menulist", $htmlLi->getHtmlTag());
+
 
 $basePage->addContent("menu", $menu);
 

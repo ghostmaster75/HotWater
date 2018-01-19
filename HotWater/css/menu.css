@@ -1,24 +1,26 @@
 #menubox {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	width: 130px;
+	width: 200px;
 	background: inherit;
 	height: 100%; /* Full height */
 	position: absolute; /* Make it stick, even on scroll */
 	overflow: hidden;
 	/* Enable scrolling if the sidenav has too much content */
-	border-right: 1px solid rgba(255, 255, 255, 0.4);
-	z-index: 0;
+	border: 1px solid rgba(255, 255, 255, 0.4);
 	top: 0px;
 	left: 0px;
 }
 
 #menubox:before {
-	width: 180px;
-	height: 105%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 250px;
+	height: 104%;
 	content: "";
 	position: absolute;
 	top: -25px;
@@ -28,13 +30,15 @@
 	background: inherit;
 	box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.2);
 	filter: blur(10px);
-	z-index: -1;
+	-webkit-filter: blur(10px);
 }
 
 #menu {
 	list-style-type: none;
 	margin: 0px;
 	padding: 0px;
+	z-index: 100;
+	position: relative;
 }
 
 #menu li {
@@ -42,9 +46,20 @@
 	color: #000;
 	padding: 8px 16px;
 	text-decoration: none;
+	cursor: pointer;
+	-webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+	-moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+	-o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+	transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+	-webkit-transform: none;
+	color: rgba(255, 255, 255, 0.5);
 }
 
-#menu li:hover {
-	background-color: rgba(255,255,255,0.1);
-	color: white;
+#menu li:hover, #menu li:active {
+	background-color: rgba(255, 255, 255, 0.1);
+	color: rgba(255, 255, 255, 1);
+}
+
+#menu li i {
+	margin-right: 10px;
 }

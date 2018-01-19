@@ -192,6 +192,34 @@ class BasePage
         }
     }
 
+    private function buildPageCss(array $cssList)
+    {
+        $css = "";
+        
+        foreach ($cssList as $cssUrl) {
+            if (is_array($cssUrl)) {
+                $css .= self::buildPageCss($cssUrl);
+            } else {
+                $css .= preg_replace("({css})", $cssUrl, self::LINKCSS);
+            }
+        }
+        
+        return $css;
+    }
+
+    private function buildPageScript(array $scriptList)
+    {
+        $script = "";
+        foreach ($scriptList as $scriptUrl) {
+            if (is_array($scriptUrl)) {
+                $script .= self::buildPageScript($scriptUrl);
+            } else {
+                $script .= preg_replace("({script})", $scriptUrl, self::LINKSCRIPT);
+            }
+        }
+        return $script;
+    }
+
     /**
      */
     private function buildPage()
@@ -200,24 +228,8 @@ class BasePage
         $script = "";
         $content = "";
         
-        foreach ($this->css as $cssUrl) {
-            if (is_array($cssUrl)) {
-                foreach ($cssUrl as $cssContentName =>  $subCssurl) {
-                    $css .= preg_replace("({css})", $subCssurl, self::LINKCSS);
-                }
-            } else {
-                $css .= preg_replace("({css})", $cssUrl, self::LINKCSS);
-            }
-        }
-        foreach ($this->script as $scriptUrl) {
-            if (is_array($scriptUrl)) {
-                foreach ($scriptUrl as $scriptContentName => $subScripUrl) {
-                    $script .= preg_replace("({script})", $subScripUrl, self::LINKSCRIPT);
-                }
-            } else {
-                $script .= preg_replace("({script})", $scriptUrl, self::LINKSCRIPT);
-            }
-        }
+        $css = self::buildPageCss($this->css);
+        $script = self::buildPageScript($this->script);
         
         foreach ($this->content as $contentName => $contentValue) {
             if (get_class($contentValue) == Template::class) {
