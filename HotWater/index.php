@@ -39,7 +39,6 @@ $header = new Template("header");
 $header->setField("title",_TITLE);
 $basePage->addContent("header", $header);
 
-
 $menu = new Template("menu");
 
 #add html element

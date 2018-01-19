@@ -39,7 +39,7 @@ class Template
     {
         preg_match_all(self::PATTERNSCRIPT, $this->template, $matches);
         foreach ($matches[2] as $i => $scriptFile) {
-            $this->script[$this->tempateName][] = $scriptFile;
+            $this->script[$this->templateName][] = $scriptFile;
             $this->template = str_replace($matches[0][$i], "", $this->template);
         }
     }
