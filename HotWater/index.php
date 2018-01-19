@@ -29,8 +29,15 @@ $basePage->addScript("js/main.js");
 $loginbox = new Template("login");
 $loginbox->setField("title",_TITLE);
 
+$systemBox = new Template("system");
+
+
 #add content from template
 #$basePage->addContent("loginbox", $loginbox);
+
+$header = new Template("header");
+$header->setField("title",_TITLE);
+$basePage->addContent("header", $header);
 
 
 $menu = new Template("menu");
@@ -52,14 +59,8 @@ $menu->addElementToField("menulist", $htmlLi->getHtmlTag());
 
 $basePage->addContent("menu", $menu);
 
-$htmlSpan = new HtmlElement(HtmlTags::SPAN);
-$htmlSpan->setAttribute("id", "label");
-$htmlSpan->setContent("Selecte a menu voice");
-
-
 $contentContainer = new Template("contentpage");
-$contentContainer->addElementToField("mycontent", $htmlSpan->getHtmlTag());
-$contentContainer->addElementToField("mycontent", $loginbox);
+$contentContainer->addElementToField("mycontent", $systemBox);
 
 $basePage->addContent("contentContainer", $contentContainer);
 
