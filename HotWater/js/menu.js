@@ -1,5 +1,7 @@
 $("#menu li").click(function() {
-	$("#label").text($(this).text());
+	icon = $(this).children('i').clone();
+	$("#titleicon").html(icon);
+	$("#titlelabel").text($(this).text());
 	$("#menubox").slideUp("fast");
 	$('#menuarrow').toggleClass("fa-angle-up", "fa-angle-down");
 });
