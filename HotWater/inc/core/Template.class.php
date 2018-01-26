@@ -96,7 +96,7 @@ class Template
             $newcss = array_merge($this->css, $fieldElement->getCss());
             $this->css = $newcss;
             $newscript = array_merge($this->script, $fieldElement->getScript());
-            $this->css = $newcss;
+            $this->script = $newscript;
             $this->fields[$fieldName][] = $fieldElement->getTemplate();
         } else {
             $this->fields[$fieldName][] = $fieldElement;

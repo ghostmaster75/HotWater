@@ -4,4 +4,5 @@ $("#menu li").click(function() {
 	$("#titlelabel").text($(this).text());
 	$("#menubox").slideUp("fast");
 	$('#menuarrow').toggleClass("fa-angle-up", "fa-angle-down");
+	
 });

@@ -59,6 +59,10 @@ $menu->addElementToField("menulist", $htmlLi->getHtmlTag());
 $basePage->addContent("menu", $menu);
 
 $contentContainer = new Template("contentpage");
+
+$systemBox->setField("titlelabel", "System Information");
+$systemBox->setField("titleicon", "<i class='fas fa-desktop'></i>");
+
 $contentContainer->addElementToField("mycontent", $systemBox);
 
 $basePage->addContent("contentContainer", $contentContainer);
